@@ -39,7 +39,7 @@ namespace Zeiterfassung_console
         /// </summary>
         public static void PrintMenuItems()
         {
-            string[] items = new string[3];
+            string[] items = new string[2];
             for (int i = 0; i < items.Length; i++)
             {
                 
@@ -73,25 +73,44 @@ namespace Zeiterfassung_console
             string? end = Console.ReadLine();
 
             //Erstelle dir eine Liste von string (als Array)
-            string[] lines = {$"Beginn:{start}", $"Ende:{end}", $"Datum:{nw}"};
+            string[] lines = {$"Beginn:{start}", $"Ende:{end}", $"Datum:{nw}", "========================="};
 
             // Kläre den Pfad, auf welchem du später Speichern möchtest
             string docPath =
               Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            // Schreibe eine Datei in deinen DokumentenOrdner
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "ZeitenVonNico.txt")))
+            string comboPath = Path.Combine(docPath, "ZeitenVonNico.txt");
+
+            try
             {
-                foreach (string line in lines)
-                    outputFile.WriteLine(line);
+                if (!File.Exists(comboPath))
+                {
+                    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "ZeitenVonNico.txt")))
+                    {
+                        foreach (string line in lines)
+                            outputFile.WriteLine(line);
+                    }
+                    Console.WriteLine($"Zeiten eingetragen! Die Datei ist unter {docPath} ZeitenVonNico.txt");
+                }
+                else
+                {
+                    Console.WriteLine("Datei existiert schon! Schreibe Änderungen in bestehende Datei!");
+                    File.AppendAllLines(Path.Combine(docPath, "ZeitenVonNico.txt"), lines);
+        
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Da ist scheinbar irgendetwas schief gelaufen...");
             }
 
+            Console.WriteLine("Alle Zeiten wurden geschrieben!");
         }
 
         
         public void SchreibeZeitenInDateiObjekt()
         {
-
+            
         }
 
         public void PrintTime()
