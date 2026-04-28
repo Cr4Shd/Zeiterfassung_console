@@ -6,35 +6,43 @@ namespace Zeiterfassung_console
 {
     class Program
     {
+        static bool theend = false;
         public enum MenuItemsSum
         {
             Zeiten_einpflegen = 0,
-            Drucke_Zeiten = 1
+            Drucke_Zeiten = 1,
+            Programm_Ende = 2
         }
         public MenuItemsSum MenuItems { get; set; }
         static void Main(string[] args)
         {
-            bool parse;
-            Console.Title = "Zeiterfassung";
-            Console.WriteLine("Willkommen zur Zeiterfassung!\n");
-            Console.WriteLine("Was möchten Sie tun?");
-            PrintMenuItems();
-            Console.WriteLine("Bitte wählen Sie aus...");
-            var x = Console.ReadLine();
-            var lolo = Int32.Parse(x);
-
-            switch (lolo)
+            do
             {
-                case 1:
-                    SpeichereZeitenAlsTextDatei();
-                    break;
-                case 2:
-                    Drucke_Zeiten();
-                    break;
-                default:
-                    break;
-            }
+                bool parse;
+                Console.Title = "Zeiterfassung";
+                Console.WriteLine("Willkommen zur Zeiterfassung!\n");
+                Console.WriteLine("Was möchten Sie tun?");
+                PrintMenuItems();
+                Console.WriteLine("Bitte wählen Sie aus...");
+                var x = Console.ReadLine();
+                var lolo = Int32.Parse(x);
 
+                switch (lolo)
+                {
+                    case 1:
+                        SpeichereZeitenAlsTextDatei();
+                        break;
+                    case 2:
+                        Drucke_Zeiten();
+                        break;
+                    case 3:
+                        Console.WriteLine("Programm wird beendet...");
+                        theend = true;
+                        break;
+                    default:
+                        break;
+                }
+            } while (!theend);
         }
 
         /// <summary>
@@ -42,7 +50,7 @@ namespace Zeiterfassung_console
         /// </summary>
         public static void PrintMenuItems()
         {
-            string[] items = new string[2];
+            string[] items = new string[3];
             for (int i = 0; i < items.Length; i++)
             {
                 
@@ -80,7 +88,7 @@ namespace Zeiterfassung_console
             string? end = Console.ReadLine();
 
             //Erstelle dir eine Enumeration von strings (als Array)
-            string[] lines = {$"Beginn:{start}", $"Ende:{end}", $"Datum:{nw}", "========================="};
+            string[] lines = { "=========================", $"Datum:{nw}", $"Beginn:{start}", $"Ende:{end}", "========================="};
 
             // Kläre den Pfad, auf welchem du später Speichern möchtest
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
