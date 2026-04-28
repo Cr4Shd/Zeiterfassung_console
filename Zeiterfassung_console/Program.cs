@@ -28,6 +28,9 @@ namespace Zeiterfassung_console
                 case 1:
                     SpeichereZeitenAlsTextDatei();
                     break;
+                case 2:
+                    Drucke_Zeiten();
+                    break;
                 default:
                     break;
             }
@@ -65,19 +68,22 @@ namespace Zeiterfassung_console
         /// </summary>
         public static void SpeichereZeitenAlsTextDatei()
         {
+            // Ein DateTime Objekt erzeugen
             DateTime nw = DateTime.Now;
+            
             Console.WriteLine($"Heute ist der {nw}");
             Console.WriteLine("Wann wurde angefangen?");
+            //das ? am Ende von "string" bedeutet, das dieser String auch null sein kann (und darf!)
             string? start = Console.ReadLine();
             Console.WriteLine("Wann ist Ende?");
+            // nochmal eine nullable string
             string? end = Console.ReadLine();
 
-            //Erstelle dir eine Liste von string (als Array)
+            //Erstelle dir eine Enumeration von strings (als Array)
             string[] lines = {$"Beginn:{start}", $"Ende:{end}", $"Datum:{nw}", "========================="};
 
             // Kläre den Pfad, auf welchem du später Speichern möchtest
-            string docPath =
-              Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             string comboPath = Path.Combine(docPath, "ZeitenVonNico.txt");
 
@@ -90,7 +96,7 @@ namespace Zeiterfassung_console
                         foreach (string line in lines)
                             outputFile.WriteLine(line);
                     }
-                    Console.WriteLine($"Zeiten eingetragen! Die Datei ist unter {docPath} ZeitenVonNico.txt");
+                    Console.WriteLine($"Zeiten eingetragen! Die Datei ist unter {docPath} ZeitenVonNico.txt zu finden.");
                 }
                 else
                 {
@@ -108,14 +114,22 @@ namespace Zeiterfassung_console
         }
 
         
-        public void SchreibeZeitenInDateiObjekt()
+        public static void SchreibeZeitenInDateiObjekt()
         {
             
         }
 
-        public void PrintTime()
+        public static void Drucke_Zeiten()
         {
-
+            Console.Clear();
+            Console.WriteLine("Zeiten werden gedruckt...");
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string pathFull = path + "\\ZeitenVonNico.txt";
+            var x = File.ReadAllLines(pathFull);
+            foreach (string line in x)
+            {
+                Console.WriteLine(line);
+            }
         }
     }
 }
