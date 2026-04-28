@@ -8,20 +8,30 @@ namespace Zeiterfassung_console
     {
         public enum MenuItemsSum
         {
-            Kommen = 0,
-            Gehen = 1,
-            Drucke_Zeiten = 2
+            Zeiten_einpflegen = 0,
+            Drucke_Zeiten = 1
         }
         public MenuItemsSum MenuItems { get; set; }
         static void Main(string[] args)
         {
+            bool parse;
             Console.Title = "Zeiterfassung";
             Console.WriteLine("Willkommen zur Zeiterfassung!\n");
             Console.WriteLine("Was möchten Sie tun?");
             PrintMenuItems();
             Console.WriteLine("Bitte wählen Sie aus...");
-            var x = Console.Read();
-            
+            var x = Console.ReadLine();
+            var lolo = Int32.Parse(x);
+
+            switch (lolo)
+            {
+                case 1:
+                    SpeichereZeitenAlsTextDatei();
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         /// <summary>
@@ -39,7 +49,7 @@ namespace Zeiterfassung_console
         /// <summary>
         /// Erfasst Start und Endzeit und bereitet alles Vor zum Speichern vor. Zum Speichern wird ein Objekt genutzt!
         /// </summary>
-        public ZeitObjekt SpeicherVorbereitungAlsObjekt()
+        public static ZeitObjekt SpeicherVorbereitungAlsObjekt()
         {
             DateTime nw = DateTime.Now;
             Console.WriteLine($"Heute ist der {nw}");
@@ -53,7 +63,7 @@ namespace Zeiterfassung_console
         /// <summary>
         /// Erfasst Start und Endzeit und bereitet alles Vor zum Speichern vor.
         /// </summary>
-        public void SpeichereZeitenAlsTextDatei()
+        public static void SpeichereZeitenAlsTextDatei()
         {
             DateTime nw = DateTime.Now;
             Console.WriteLine($"Heute ist der {nw}");
