@@ -92,7 +92,7 @@ namespace Zeiterfassung_console
 
             // Kläre den Pfad, auf welchem du später Speichern möchtest
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
+            // Hänge den Dateinamen an den Pfad an
             string comboPath = Path.Combine(docPath, "ZeitenVonNico.txt");
 
             try
@@ -115,10 +115,10 @@ namespace Zeiterfassung_console
             }
             catch
             {
-                Console.WriteLine("Da ist scheinbar irgendetwas schief gelaufen...");
+                Console.WriteLine("Da ist scheinbar irgendetwas schief gelaufen... :(");
             }
 
-            Console.WriteLine("Alle Zeiten wurden geschrieben!");
+            Console.WriteLine("Alle Zeiten wurden geschrieben - kehre in Hauptmenü zurück...");
         }
 
         
