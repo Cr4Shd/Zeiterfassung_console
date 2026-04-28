@@ -57,6 +57,8 @@ namespace Zeiterfassung_console
                 Console.WriteLine($"{i+1}: {(MenuItemsSum)i}");
             }
         }
+
+        #region ObjektOrientierung
         /// <summary>
         /// Erfasst Start und Endzeit und bereitet alles Vor zum Speichern vor. Zum Speichern wird ein Objekt genutzt!
         /// </summary>
@@ -71,6 +73,10 @@ namespace Zeiterfassung_console
             ZeitObjekt ze = new(start, end);
             return ze;
         }
+
+        #endregion 
+
+
         /// <summary>
         /// Erfasst Start und Endzeit und bereitet alles Vor zum Speichern vor.
         /// </summary>
@@ -88,7 +94,7 @@ namespace Zeiterfassung_console
             string? end = Console.ReadLine();
 
             //Erstelle dir eine Enumeration von strings (als Array)
-            string[] lines = { "=========================", $"Datum:{nw}", $"Beginn:{start}", $"Ende:{end}", "========================="};
+            string[] lines = { "=========================", $"Datum:{nw}", $"Beginn:{start}", $"Ende:{end}", "=========================\n"};
 
             // Kläre den Pfad, auf welchem du später Speichern möchtest
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
